@@ -22,9 +22,6 @@ public class JumpAgain extends BukkitRunnable {
 	
 	@Override
 	public void run() {
-		
-		_plugin.getLogger().info("Se ejecuto task del player " + _playername);
-		
 		synchronized(_plugin.getPlayers())
 		{
 			if (!_plugin.getPlayers().isEmpty() && _plugin.getPlayers().contains(_playername))

@@ -14,6 +14,8 @@ import com.github.luksdlt92.utils.Utils;
 public class JumpListener implements Listener {
 	
 	private final static int MIN_FOOD = 6;
+	private final static int LIMIT = 6;
+	private final static int MAX_DISTANCE = 5;
 	private final DoubleJumpReload _plugin;
 	
 	public JumpListener(DoubleJumpReload plugin)
@@ -33,15 +35,10 @@ public class JumpListener implements Listener {
     	player.setAllowFlight(false);
     	player.setFlying(false);
     	
-    	//if (Utils.isInAllowWorld(player))
-    	//{
-    	
-    	_plugin.getLogger().info("El player " + player.getName() + " tiene de comidAAA -> " + player.getFoodLevel());
     	if (player.getFoodLevel() > MIN_FOOD)
     	{
     		player.setVelocity(player.getLocation().getDirection().multiply(0.2).setY(0.5));
     	}
-    	//}
     	
     	synchronized(_plugin.getPlayers())
     	{
@@ -53,7 +50,6 @@ public class JumpListener implements Listener {
     	
     	@SuppressWarnings("unused")
 		BukkitTask task = new JumpAgain(_plugin, player.getName()).runTaskLater(_plugin, 100);
-    	_plugin.getLogger().info("Libertaaaaad (salto)");
     }
        
     @EventHandler
@@ -61,23 +57,47 @@ public class JumpListener implements Listener {
     {
     	Player player = event.getPlayer();
     	
-    	//if (Utils.isInAllowWorld(player))
-    	//{
-    	_plugin.getLogger().info("El player " + player.getName() + " tiene de comida -> " + player.getFoodLevel());
-    	if (player.getFoodLevel() > MIN_FOOD)
+    	if (!Utils.isInCreative(player) && !Utils.isInAir(player) &&(!player.isFlying())) 
     	{
-        	if(!Utils.isInCreative(player) && !Utils.isInAir(player) &&(!player.isFlying())) 
+        	if (_plugin.getPlayersDisableJump().contains(player.getName()))
         	{
-        		synchronized(_plugin.getPlayers())
+        		synchronized(_plugin.getPlayersDisableJump())
         		{
-            		if (!_plugin.getPlayers().contains(player.getName()))
-            		{
-            			player.setAllowFlight(true);
-            		}
+        			_plugin.getPlayersDisableJump().remove(player.getName());
         		}
         	}
+    		else
+    		{
+    			if (player.getFoodLevel() > MIN_FOOD)
+            	{
+            		synchronized(_plugin.getPlayers())
+            		{
+                		if (!_plugin.getPlayers().contains(player.getName()))
+                		{
+                			if (!player.getAllowFlight())
+                			{
+                				player.setAllowFlight(true);
+                				_plugin.getLogger().info("Se seteo el flight");
+                			}
+                		}
+            		}
+            	}
+    		}
+    
     	}
-    	//}
+    	else if (!Utils.isInCreative(player) && Utils.isInAir(player) && !player.isFlying() && player.getAllowFlight())
+    	{
+    		int distance = Utils.distanceToFloor(player, LIMIT);
+    		
+    		if (distance > MAX_DISTANCE)
+    		{
+    			player.setAllowFlight(false);
+    			synchronized(_plugin.getPlayersDisableJump())
+    			{
+    				_plugin.getPlayersDisableJump().add(player.getName());
+    			}
+    		}
+    	}
     }
 	
 }

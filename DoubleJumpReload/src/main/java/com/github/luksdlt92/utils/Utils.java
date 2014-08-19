@@ -23,5 +23,23 @@ public class Utils {
 		}
 		return false;
 	}
+	
+	public static int distanceToFloor(Player player, int limit)
+	{
+		int i = 0;
+		
+		for (int count = 0; count < limit; count++)
+		{
+			if (player.getLocation().subtract(0, i, 0).getBlock().getType() == Material.AIR)
+			{
+				i++;
+			}
+			else
+			{
+				break;
+			}
+		}
+		return i;
+	}
 
 }

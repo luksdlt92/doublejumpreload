@@ -1,4 +1,4 @@
-package com.minekkit.utils;
+package com.github.luksdlt92.utils;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;

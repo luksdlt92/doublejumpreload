@@ -1,8 +1,8 @@
-package com.minekkit.task;
+package com.github.luksdlt92.task;
 
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.minekkit.DoubleJumpReload;
+import com.github.luksdlt92.DoubleJumpReload;
 
 /*
  * Task que se ejecuta luego de un salto

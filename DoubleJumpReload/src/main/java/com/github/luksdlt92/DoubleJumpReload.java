@@ -1,12 +1,17 @@
-package com.minekkit;
+package com.github.luksdlt92;
  
 import java.util.ArrayList;
+
+/*
+ * DoubleJumpReload plugin
+ * Made by luksdlt92 and Abdalion
+ */
 
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.minekkit.commands.DoubleJumpCommand;
-import com.minekkit.listeners.JumpListener;
+import com.github.luksdlt92.commands.DoubleJumpCommand;
+import com.github.luksdlt92.listeners.JumpListener;
  
 public class DoubleJumpReload extends JavaPlugin implements Listener {
 

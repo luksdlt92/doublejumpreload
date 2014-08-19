@@ -1,11 +1,11 @@
-package com.minekkit.commands;
+package com.github.luksdlt92.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.minekkit.DoubleJumpReload;
+import com.github.luksdlt92.DoubleJumpReload;
 
 public class DoubleJumpCommand implements CommandExecutor {
 	

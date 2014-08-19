@@ -1,4 +1,4 @@
-package com.minekkit.listeners;
+package com.github.luksdlt92.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -7,9 +7,9 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.scheduler.BukkitTask;
 
-import com.minekkit.DoubleJumpReload;
-import com.minekkit.task.JumpAgain;
-import com.minekkit.utils.Utils;
+import com.github.luksdlt92.DoubleJumpReload;
+import com.github.luksdlt92.task.JumpAgain;
+import com.github.luksdlt92.utils.Utils;
 
 public class JumpListener implements Listener {
 	

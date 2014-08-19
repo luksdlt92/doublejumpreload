@@ -1,5 +1,5 @@
 name: DoubleJumpReload
-main: com.minekkit.DoubleJumpReload
+main: com.github.luksdlt92.DoubleJumpReload
 version: 1
 commands:
   jumpdelay:

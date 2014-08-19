@@ -37,7 +37,7 @@ public class JumpListener implements Listener {
     	//{
     	
     	_plugin.getLogger().info("El player " + player.getName() + " tiene de comidAAA -> " + player.getFoodLevel());
-    	if (player.getFoodLevel() >= MIN_FOOD)
+    	if (player.getFoodLevel() > MIN_FOOD)
     	{
     		player.setVelocity(player.getLocation().getDirection().multiply(0.2).setY(0.5));
     	}
@@ -64,7 +64,7 @@ public class JumpListener implements Listener {
     	//if (Utils.isInAllowWorld(player))
     	//{
     	_plugin.getLogger().info("El player " + player.getName() + " tiene de comida -> " + player.getFoodLevel());
-    	if (player.getFoodLevel() >= MIN_FOOD)
+    	if (player.getFoodLevel() > MIN_FOOD)
     	{
         	if(!Utils.isInCreative(player) && !Utils.isInAir(player) &&(!player.isFlying())) 
         	{

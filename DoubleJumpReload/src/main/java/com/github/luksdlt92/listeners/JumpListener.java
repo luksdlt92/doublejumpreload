@@ -13,6 +13,7 @@ import com.github.luksdlt92.utils.Utils;
 
 public class JumpListener implements Listener {
 	
+	private final static int MIN_FOOD = 6;
 	private final DoubleJumpReload _plugin;
 	
 	public JumpListener(DoubleJumpReload plugin)
@@ -34,7 +35,12 @@ public class JumpListener implements Listener {
     	
     	//if (Utils.isInAllowWorld(player))
     	//{
+    	
+    	_plugin.getLogger().info("El player " + player.getName() + " tiene de comidAAA -> " + player.getFoodLevel());
+    	if (player.getFoodLevel() >= MIN_FOOD)
+    	{
     		player.setVelocity(player.getLocation().getDirection().multiply(0.2).setY(0.5));
+    	}
     	//}
     	
     	synchronized(_plugin.getPlayers())
@@ -57,6 +63,9 @@ public class JumpListener implements Listener {
     	
     	//if (Utils.isInAllowWorld(player))
     	//{
+    	_plugin.getLogger().info("El player " + player.getName() + " tiene de comida -> " + player.getFoodLevel());
+    	if (player.getFoodLevel() >= MIN_FOOD)
+    	{
         	if(!Utils.isInCreative(player) && !Utils.isInAir(player) &&(!player.isFlying())) 
         	{
         		synchronized(_plugin.getPlayers())
@@ -67,6 +76,7 @@ public class JumpListener implements Listener {
             		}
         		}
         	}
+    	}
     	//}
     }
 	

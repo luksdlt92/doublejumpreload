@@ -1,0 +1,9 @@
+name: DoubleJumpReload
+main: com.minekkit.DoubleJumpReload
+version: 1
+commands:
+  jumpdelay:
+    description: Saber players con cooldown.
+    usage: /<command>
+    permission: <plugin name>.jumpdelay
+    permission-message: You don't have <permission>

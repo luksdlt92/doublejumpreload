@@ -12,8 +12,7 @@ public class Utils {
 		Material.YELLOW_FLOWER,
 		Material.RED_ROSE,
 		Material.RED_MUSHROOM,
-		Material.BROWN_MUSHROOM,
-		Material.GRASS,
+		Material.BROWN_MUSHROOM
 	};
 	
 	public static boolean isInCreative(Player player)
@@ -26,6 +25,15 @@ public class Utils {
 	}
 	
 	public static boolean isInAir(Player player)
+	{
+		if(player.getLocation().subtract(0, 1, 0).getBlock().getType() == Material.AIR)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean isTraversableBlock(Player player)
 	{
 		for (Material m : MATERIALS)
 		{

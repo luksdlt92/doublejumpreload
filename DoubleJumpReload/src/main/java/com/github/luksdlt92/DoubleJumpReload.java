@@ -11,6 +11,7 @@ import com.github.luksdlt92.commands.DoubleJumpCommand;
 import com.github.luksdlt92.listeners.JumpListener;
 import com.github.luksdlt92.permissions.PermissionCanJump;
 import com.github.luksdlt92.permissions.PermissionCanUseCommands;
+import com.github.luksdlt92.permissions.PermissionToggleJump;
 
 /*
  * DoubleJumpReload plugin
@@ -21,7 +22,10 @@ public class DoubleJumpReload extends JavaPlugin implements Listener {
 
 	public Permission playerPermission1 = new Permission("DoubleJumpReload.Jump");
 	public Permission playerPermission2 = new Permission("DoubleJumpReload.JumpCommands");
+	public Permission playerPermission3 = new Permission("DoubleJumpReload.ToggleJump");
+	
 	public ArrayList<String> _players = new ArrayList<String>();
+	public ArrayList<String> _playersDisabled = new ArrayList<String>();
 	
     @Override
     public void onEnable()
@@ -29,10 +33,12 @@ public class DoubleJumpReload extends JavaPlugin implements Listener {
     	PluginManager pm = getServer().getPluginManager();
     	pm.addPermission(new PermissionCanJump().canJump);
     	pm.addPermission(new PermissionCanUseCommands().canUseCommands);
+    	pm.addPermission(new PermissionToggleJump().toggleJump);
     	
     	new JumpListener(this);
     	this.getCommand("doublejumpdelay").setExecutor(new DoubleJumpCommand(this));
     	this.getCommand("doublejumpclear").setExecutor(new DoubleJumpCommand(this));
+    	this.getCommand("doublejumptoggle").setExecutor(new DoubleJumpCommand(this));
     }
     
     @Override
@@ -44,6 +50,11 @@ public class DoubleJumpReload extends JavaPlugin implements Listener {
     public ArrayList<String> getPlayers()
     {
     	return _players;
+    }
+    
+    public ArrayList<String> getPlayersDisabled()
+    {
+    	return _playersDisabled;
     }
     
 }

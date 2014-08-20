@@ -1,5 +1,7 @@
 package com.github.luksdlt92.task;
 
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.github.luksdlt92.DoubleJumpReload;
@@ -12,21 +14,22 @@ import com.github.luksdlt92.DoubleJumpReload;
 public class JumpAgain extends BukkitRunnable {
 
 	private final DoubleJumpReload _plugin;
-	private final String _playername;
+	private final Player _player;
 	
-	public JumpAgain (DoubleJumpReload plugin, String playerName)
+	public JumpAgain (DoubleJumpReload plugin, Player player)
 	{
 		_plugin = plugin;
-		_playername = playerName;
+		_player = player;
 	}
 	
 	@Override
 	public void run() {
 		synchronized(_plugin.getPlayers())
 		{
-			if (_plugin.getPlayers().contains(_playername))
+			if (_plugin.getPlayers().contains(_player.getName()))
 			{
-				_plugin.getPlayers().remove(_playername);
+				_plugin.getPlayers().remove(_player.getName());
+				_player.sendMessage(ChatColor.BLUE + "[DoubleJumpReload]" + ChatColor.WHITE + " Ya podes saltar de nuevo!");
 			}
 		}
 	}

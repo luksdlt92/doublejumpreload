@@ -8,3 +8,6 @@ commands:
   doublejumpclear:
     description: Limpiar cooldown.
     usage: /<command>
+  doublejumptoggle:
+    description: Activa / Desactiva el Double Jump.
+    usage: /<command>

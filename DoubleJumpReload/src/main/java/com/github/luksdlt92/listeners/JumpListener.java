@@ -3,7 +3,6 @@ package com.github.luksdlt92.listeners;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -14,6 +13,7 @@ import com.github.luksdlt92.utils.Utils;
 public class JumpListener implements Listener {
 	
 	private static final int MIN_FOOD_LEVEL = 6;
+	private static final int TICKS_DELAY = 100; // If the server is not lagged, 20 ticks = 1 second
 	private final DoubleJumpReload _plugin;
 	
 	public JumpListener(DoubleJumpReload plugin)
@@ -21,30 +21,6 @@ public class JumpListener implements Listener {
 		_plugin = plugin;
 		_plugin.getServer().getPluginManager().registerEvents(this, _plugin);
 	}
-       
-    @EventHandler
-    public void onPlayerMove(PlayerMoveEvent event) 
-    {
-    	Player player = event.getPlayer();
-    	
-    	if (!Utils.isInCreative(player) && !player.isFlying() && !_plugin.getPlayersDisableJump().contains(player.getName()))
-    	{
-    		if (Utils.isInAir(player))
-    		{
-        		if (!_plugin.getPlayers().contains(player.getName()))
-        		{
-        			_plugin.getPlayers().add(player.getName());
-        		}
-    		}
-    		else
-    		{
-        		if (_plugin.getPlayers().contains(player.getName()))
-        		{
-        			_plugin.getPlayers().remove(player.getName());
-        		}
-    		}
-    	}
-    }
     
     @EventHandler
     public void onPlayerSneak(PlayerToggleSneakEvent event)
@@ -54,9 +30,9 @@ public class JumpListener implements Listener {
     	if (Utils.isInCreative(player))
     		return;
     	
-		if (Utils.isInAir(player) && _plugin.getPlayers().contains(player.getName()))
+		if (Utils.isInAir(player) && player.getFoodLevel() > MIN_FOOD_LEVEL)
 		{
-			if (player.getFoodLevel() > MIN_FOOD_LEVEL)
+			if (!_plugin.getPlayers().contains(player.getName()))
 			{
 				if (Utils.hasOnePossibleDirection(player))
 				{
@@ -69,16 +45,11 @@ public class JumpListener implements Listener {
 					player.sendMessage("Double Jump!");
 				}
 				
-				if (!_plugin.getPlayersDisableJump().contains(player.getName()))
-				{
-					_plugin.getPlayersDisableJump().add(player.getName());
-				}
+				_plugin.getPlayers().add(player.getName());
 				
 				@SuppressWarnings("unused")
-				BukkitTask task = new JumpAgain(_plugin, player.getName()).runTaskLater(_plugin, 100);
+				BukkitTask task = new JumpAgain(_plugin, player.getName()).runTaskLater(_plugin, TICKS_DELAY);
 			}
-
-			_plugin.getPlayers().remove(player.getName());
 		}
     }
 }

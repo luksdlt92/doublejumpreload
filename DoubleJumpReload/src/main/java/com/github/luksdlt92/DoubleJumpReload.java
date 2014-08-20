@@ -16,7 +16,6 @@ import com.github.luksdlt92.listeners.JumpListener;
 public class DoubleJumpReload extends JavaPlugin implements Listener {
 
 	public ArrayList<String> _players = new ArrayList<String>();
-	public ArrayList<String> _playersDisableJump = new ArrayList<String>();
 	
     @Override
     public void onEnable()
@@ -29,7 +28,6 @@ public class DoubleJumpReload extends JavaPlugin implements Listener {
     public void onDisable()
     {
     	_players.clear();
-    	_playersDisableJump.clear();
     }
     
     public ArrayList<String> getPlayers()
@@ -37,8 +35,4 @@ public class DoubleJumpReload extends JavaPlugin implements Listener {
     	return _players;
     }
     
-    public ArrayList<String> getPlayersDisableJump()
-    {
-    	return _playersDisableJump;
-    }
 }

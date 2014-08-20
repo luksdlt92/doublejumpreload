@@ -13,6 +13,7 @@ import com.github.luksdlt92.utils.Utils;
 
 public class JumpListener implements Listener {
 	
+	private static final int MIN_FOOD_LEVEL = 6;
 	private final DoubleJumpReload _plugin;
 	
 	public JumpListener(DoubleJumpReload plugin)
@@ -55,26 +56,29 @@ public class JumpListener implements Listener {
     	
 		if (Utils.isInAir(player) && _plugin.getPlayers().contains(player.getName()))
 		{
-			if (Utils.hasOnePossibleDirection(player))
+			if (player.getFoodLevel() > MIN_FOOD_LEVEL)
 			{
-				player.setVelocity(player.getLocation().getDirection().multiply(-0.4).setY(0.8));
-				player.sendMessage("Double Jump contra la pared!");
+				if (Utils.hasOnePossibleDirection(player))
+				{
+					player.setVelocity(player.getLocation().getDirection().multiply(-0.4).setY(0.8));
+					player.sendMessage("Double Jump contra la pared!");
+				}
+				else
+				{
+					player.setVelocity(player.getLocation().getDirection().multiply(0.4).setY(0.5));
+					player.sendMessage("Double Jump!");
+				}
+				
+				if (!_plugin.getPlayersDisableJump().contains(player.getName()))
+				{
+					_plugin.getPlayersDisableJump().add(player.getName());
+				}
+				
+				@SuppressWarnings("unused")
+				BukkitTask task = new JumpAgain(_plugin, player.getName()).runTaskLater(_plugin, 100);
 			}
-			else
-			{
-				player.setVelocity(player.getLocation().getDirection().multiply(0.4).setY(0.5));
-				player.sendMessage("Double Jump!");
-			}
-			
+
 			_plugin.getPlayers().remove(player.getName());
-			
-			if (!_plugin.getPlayersDisableJump().contains(player.getName()))
-			{
-				_plugin.getPlayersDisableJump().add(player.getName());
-			}
-			
-			@SuppressWarnings("unused")
-			BukkitTask task = new JumpAgain(_plugin, player.getName()).runTaskLater(_plugin, 100);
 		}
     }
 }

@@ -25,6 +25,13 @@ public class DoubleJumpReload extends JavaPlugin implements Listener {
     	this.getCommand("jumpdelay").setExecutor(new DoubleJumpCommand(this));
     }
     
+    @Override
+    public void onDisable()
+    {
+    	_players.clear();
+    	_playersDisableJump.clear();
+    }
+    
     public ArrayList<String> getPlayers()
     {
     	return _players;

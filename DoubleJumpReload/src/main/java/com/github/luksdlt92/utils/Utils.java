@@ -6,6 +6,16 @@ import org.bukkit.entity.Player;
 
 public class Utils {
 	
+	private static Material[] MATERIALS =
+	{
+		Material.AIR,
+		Material.YELLOW_FLOWER,
+		Material.RED_ROSE,
+		Material.RED_MUSHROOM,
+		Material.BROWN_MUSHROOM,
+		Material.GRASS,
+	};
+	
 	public static boolean isInCreative(Player player)
 	{
 		if (player.getGameMode() == GameMode.CREATIVE)
@@ -17,29 +27,14 @@ public class Utils {
 	
 	public static boolean isInAir(Player player)
 	{
-		if(player.getLocation().subtract(0, 1, 0).getBlock().getType() == Material.AIR)
+		for (Material m : MATERIALS)
 		{
-			return true;
+			if(player.getLocation().subtract(0, 1, 0).getBlock().getType() == m)
+			{
+				return true;
+			}
 		}
 		return false;
-	}
-	
-	public static int distanceToFloor(Player player, int limit)
-	{
-		int i = 0;
-		
-		for (int count = 0; count < limit; count++)
-		{
-			if (player.getLocation().subtract(0, i, 0).getBlock().getType() == Material.AIR)
-			{
-				i++;
-			}
-			else
-			{
-				break;
-			}
-		}
-		return i;
 	}
 	
 	public static boolean hasOnePossibleDirection(Player player)

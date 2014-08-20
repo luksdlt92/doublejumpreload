@@ -2,8 +2,9 @@ name: DoubleJumpReload
 main: com.github.luksdlt92.DoubleJumpReload
 version: 1
 commands:
-  jumpdelay:
-    description: Saber players con cooldown.
+  doublejumpdelay:
+    description: Saber cantidad de jugadores con cooldown.
     usage: /<command>
-    permission: <plugin name>.jumpdelay
-    permission-message: You don't have <permission>
+  doublejumpclear:
+    description: Limpiar cooldown.
+    usage: /<command>

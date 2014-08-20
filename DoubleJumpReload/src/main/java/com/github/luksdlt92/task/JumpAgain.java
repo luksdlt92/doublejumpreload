@@ -22,11 +22,11 @@ public class JumpAgain extends BukkitRunnable {
 	
 	@Override
 	public void run() {
-		synchronized(_plugin.getPlayers())
+		synchronized(_plugin.getPlayersDisableJump())
 		{
-			if (!_plugin.getPlayers().isEmpty() && _plugin.getPlayers().contains(_playername))
+			if (_plugin.getPlayersDisableJump().contains(_playername))
 			{
-				_plugin.getPlayers().remove(_playername);
+				_plugin.getPlayersDisableJump().remove(_playername);
 			}
 		}
 	}

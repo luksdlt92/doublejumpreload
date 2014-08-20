@@ -41,5 +41,35 @@ public class Utils {
 		}
 		return i;
 	}
-
+	
+	public static boolean hasOnePossibleDirection(Player player)
+	{
+    	int i = 0;
+    	
+    	if (player.getLocation().subtract(1, 0, 0).getBlock().getType() != Material.AIR)
+    	{
+    		i++;
+    	}
+    	
+    	if (player.getLocation().subtract(-1, 0, 0).getBlock().getType() != Material.AIR)
+    	{
+    		i++;
+    	}
+    	
+    	if (player.getLocation().subtract(0, 0, 1).getBlock().getType() != Material.AIR)
+    	{
+    		i++;
+    	}
+    	
+    	if (player.getLocation().subtract(0, 0, -1).getBlock().getType() != Material.AIR)
+    	{
+    		i++;
+    	}
+    	
+    	if (i == 1)
+    	{
+    		return true;
+    	}
+    	return false;
+	}
 }

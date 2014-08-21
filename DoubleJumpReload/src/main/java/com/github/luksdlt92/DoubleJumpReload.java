@@ -25,7 +25,7 @@ public class DoubleJumpReload extends JavaPlugin implements Listener {
 	public Permission playerPermission3 = new Permission("DoubleJumpReload.ToggleJump");
 	
 	public ArrayList<String> _players = new ArrayList<String>();
-	public ArrayList<String> _playersDisabled = new ArrayList<String>();
+	public ArrayList<String> _playersEnabled = new ArrayList<String>();
 	
     @Override
     public void onEnable()
@@ -36,9 +36,9 @@ public class DoubleJumpReload extends JavaPlugin implements Listener {
     	pm.addPermission(new PermissionToggleJump().toggleJump);
     	
     	new JumpListener(this);
-    	this.getCommand("doublejumpdelay").setExecutor(new DoubleJumpCommand(this));
-    	this.getCommand("doublejumpclear").setExecutor(new DoubleJumpCommand(this));
-    	this.getCommand("doublejumptoggle").setExecutor(new DoubleJumpCommand(this));
+    	this.getCommand("djdelay").setExecutor(new DoubleJumpCommand(this));
+    	this.getCommand("djclear").setExecutor(new DoubleJumpCommand(this));
+    	this.getCommand("djtoggle").setExecutor(new DoubleJumpCommand(this));
     }
     
     @Override
@@ -52,9 +52,9 @@ public class DoubleJumpReload extends JavaPlugin implements Listener {
     	return _players;
     }
     
-    public ArrayList<String> getPlayersDisabled()
+    public ArrayList<String> getPlayersEnabled()
     {
-    	return _playersDisabled;
+    	return _playersEnabled;
     }
     
 }

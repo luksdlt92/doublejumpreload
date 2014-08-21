@@ -16,7 +16,7 @@ import com.github.luksdlt92.utils.Utils;
 public class JumpListener implements Listener {
 	
 	private static final int MIN_FOOD_LEVEL = 6;
-	private static final int TICKS_DELAY = 100; // If the server is not lagged, 20 ticks = 1 second
+	private static final int TICKS_DELAY = 50; // If the server is not lagged, 20 ticks = 1 second
 	private final DoubleJumpReload _plugin;
 	
 	public JumpListener(DoubleJumpReload plugin)
@@ -35,9 +35,9 @@ public class JumpListener implements Listener {
 			_plugin.getPlayers().remove(player.getName());
 		}
 		
-		if (_plugin.getPlayersDisabled().contains(player.getName()))
+		if (_plugin.getPlayersEnabled().contains(player.getName()))
 		{
-			_plugin.getPlayersDisabled().remove(player.getName());
+			_plugin.getPlayersEnabled().remove(player.getName());
 		}
 	}
     
@@ -51,7 +51,7 @@ public class JumpListener implements Listener {
         	if (Utils.isInCreative(player))
         		return;
         	
-        	if (!_plugin.getPlayersDisabled().contains(player.getName()))
+        	if (_plugin.getPlayersEnabled().contains(player.getName()))
         	{
         		if (player.getFoodLevel() > MIN_FOOD_LEVEL && !_plugin.getPlayers().contains(player.getName()))
             	{
@@ -74,10 +74,10 @@ public class JumpListener implements Listener {
                 			player.sendMessage(ChatColor.GREEN + "[DoubleJumpReload]" + ChatColor.WHITE + " Double Jump!");
             			}
             			
-        				_plugin.getPlayers().add(player.getName());
-        				
             			@SuppressWarnings("unused")
             			BukkitTask task = new JumpAgain(_plugin, player).runTaskLater(_plugin, TICKS_DELAY);
+            			
+        				_plugin.getPlayers().add(player.getName());
             	}
         	}
     	}

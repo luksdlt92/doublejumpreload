@@ -2,12 +2,12 @@ name: DoubleJumpReload
 main: com.github.luksdlt92.DoubleJumpReload
 version: 1
 commands:
-  doublejumpdelay:
+  djdelay:
     description: Saber cantidad de jugadores con cooldown.
     usage: /<command>
-  doublejumpclear:
+  djclear:
     description: Limpiar cooldown.
     usage: /<command>
-  doublejumptoggle:
+  djtoggle:
     description: Activa / Desactiva el Double Jump.
     usage: /<command>

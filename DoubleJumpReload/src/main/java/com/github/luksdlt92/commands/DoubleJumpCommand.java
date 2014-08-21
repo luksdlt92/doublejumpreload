@@ -29,17 +29,17 @@ public class DoubleJumpCommand implements CommandExecutor {
 			
 			if(player.hasPermission(new PermissionToggleJump().toggleJump))
 			{
-		    	if (cmd.getName().equalsIgnoreCase("doublejumptoggle"))
+		    	if (cmd.getName().equalsIgnoreCase("djtoggle"))
 		    	{
-		    		if (_plugin.getPlayersDisabled().contains(player.getName()))
+		    		if (_plugin.getPlayersEnabled().contains(player.getName()))
 		    		{
-		    			_plugin.getPlayersDisabled().remove(player.getName());
-		    			player.sendMessage(ChatColor.GREEN + "[DoubleJumpReload]" + ChatColor.WHITE + " Se ha activado");
+		    			_plugin.getPlayersEnabled().remove(player.getName());
+		    			player.sendMessage(ChatColor.GREEN + "[DoubleJumpReload]" + ChatColor.WHITE + " Se ha desactivado");
 		    		}
 		    		else
 		    		{
-		    			_plugin.getPlayersDisabled().add(player.getName());
-		    			player.sendMessage(ChatColor.GREEN + "[DoubleJumpReload]" + ChatColor.WHITE + " Se ha desactivado");
+		    			_plugin.getPlayersEnabled().add(player.getName());
+		    			player.sendMessage(ChatColor.GREEN + "[DoubleJumpReload]" + ChatColor.WHITE + " Se ha activado");
 		    		}
 		    		return true;
 		    	}
@@ -47,11 +47,11 @@ public class DoubleJumpCommand implements CommandExecutor {
 			
 			if(player.hasPermission(new PermissionCanUseCommands().canUseCommands))
 			{
-		    	if (cmd.getName().equalsIgnoreCase("doublejumpdelay"))
+		    	if (cmd.getName().equalsIgnoreCase("djdelay"))
 		    	{
 		    		player.sendMessage("La cantidad de PJs con cooldown son " + _plugin.getPlayers().size());
 		    	}
-		    	else if (cmd.getName().equalsIgnoreCase("doublejumpclear"))
+		    	else if (cmd.getName().equalsIgnoreCase("djclear"))
 		    	{
 		    		synchronized(_plugin.getPlayers())
 		    		{
@@ -63,7 +63,7 @@ public class DoubleJumpCommand implements CommandExecutor {
 			}
 			else
 			{
-				player.sendMessage("No tenes permisos campeon");
+				player.sendMessage("No tenes permisos master");
 				return false;
 			}
 		}
